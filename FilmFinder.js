@@ -1,7 +1,8 @@
 const tmdbKey = '8ac4aafb825fd0b5b6024aca6053c294';
 const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 const playBtn = document.getElementById('playBtn');
-const genreDropdown = document.getElementById('genreDropdown'); // Make sure this matches your HTML element
+const genreDropdown = document.getElementById('genreDropdown');
+const movieContainer = document.getElementById('movieContainer');
 
 // Function to fetch genres and populate the dropdown
 const getGenres = async () => {
@@ -13,12 +14,8 @@ const getGenres = async () => {
     const response = await fetch(urlToFetch);
     if (response.ok) {
       const jsonResponse = await response.json();
-      console.log("Full response:", jsonResponse); // Log the entire response
-      const genres = jsonResponse.genres; // Get genres array
-      console.log("Genres:", genres); // Log the genres array
-
-      populateGenreDropdown(genres); // Populate dropdown
-      return genres; // Return genres for further use if needed
+      const genres = jsonResponse.genres;
+      populateGenreDropdown(genres); 
     } else {
       console.error("Error fetching genres:", response.status);
     }
@@ -29,15 +26,13 @@ const getGenres = async () => {
 
 // Function to populate the genre dropdown with options
 const populateGenreDropdown = (genres) => {
-  // Check if the dropdown exists
   if (genreDropdown) {
     genres.forEach(genre => {
       const option = document.createElement('option');
-      option.value = genre.id; // Set genre ID as value
-      option.textContent = genre.name; // Display genre name
-      genreDropdown.appendChild(option); // Add the option to the dropdown
+      option.value = genre.id;
+      option.textContent = genre.name;
+      genreDropdown.appendChild(option);
     });
-    console.log("Dropdown populated with genres");
   } else {
     console.error('Dropdown element not found');
   }
@@ -45,10 +40,10 @@ const populateGenreDropdown = (genres) => {
 
 // Function to get the selected genre from the dropdown
 const getSelectedGenre = () => {
-  return genreDropdown.value; // Get selected genre ID from the dropdown
+  return genreDropdown.value;
 };
 
-// Function to get movies based on the selected genre
+// Function to fetch movies based on the selected genre
 const getMovies = async () => {
   const selectedGenre = getSelectedGenre();
   if (!selectedGenre) {
@@ -56,7 +51,7 @@ const getMovies = async () => {
     return;
   }
 
-  const genreRequestEndpoint = `/discover/movie`; // Fetch movies based on genre
+  const genreRequestEndpoint = `/discover/movie`;
   const requestParams = `?api_key=${tmdbKey}&with_genres=${selectedGenre}`;
   const urlToFetch = `${tmdbBaseUrl}${genreRequestEndpoint}${requestParams}`;
 
@@ -64,10 +59,8 @@ const getMovies = async () => {
     const response = await fetch(urlToFetch);
     if (response.ok) {
       const jsonResponse = await response.json();
-      console.log("Movies response:", jsonResponse);
-      const movies = jsonResponse.results; // Array of movie results
-      console.log("Movies:", movies);
-      // You can now display these movies or pick a random movie to display
+      const movies = jsonResponse.results;
+      displayMovies(movies); // Display movies after fetching
     } else {
       console.error("Error fetching movies:", response.status);
     }
@@ -76,28 +69,40 @@ const getMovies = async () => {
   }
 };
 
-// Function to display a random movie
-const showRandomMovie = () => {
-  const movieInfo = document.getElementById('movieInfo');
-  if (movieInfo.childNodes.length > 0) {
-    clearCurrentMovie();
+// Function to display movies
+const displayMovies = (movies) => {
+  movieContainer.innerHTML = ''; // Clear previous movie display
+
+  if (movies.length > 0) {
+    movies.forEach(movie => {
+      const movieElement = document.createElement('div');
+      movieElement.classList.add('movie');
+
+      const movieTitle = document.createElement('h3');
+      movieTitle.textContent = movie.title;
+      movieElement.appendChild(movieTitle);
+
+      const movieOverview = document.createElement('p');
+      movieOverview.textContent = movie.overview;
+      movieElement.appendChild(movieOverview);
+
+      if (movie.poster_path) {
+        const moviePoster = document.createElement('img');
+        moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+        movieElement.appendChild(moviePoster);
+      }
+
+      movieContainer.appendChild(movieElement); 
+    });
+  } else {
+    movieContainer.textContent = 'No movies found for this genre.';
   }
-
-  // Call getMovies() when the play button is clicked
-  getMovies();
 };
-
-// Clear the current movie display (if needed)
-const clearCurrentMovie = () => {
-  const movieInfo = document.getElementById('movieInfo');
-  movieInfo.innerHTML = ""; // Clear movie display
-};
-
-// Fetch genres and populate the dropdown when the page loads
-document.addEventListener("DOMContentLoaded", () => {
-  getGenres(); // Fetch genres when the page loads
-});
 
 // Event listener for the "Play" button
-playBtn.onclick = showRandomMovie;
-// End of FilmFinder.js
+playBtn.onclick = getMovies;
+
+// Fetch genres when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+  getGenres();
+});

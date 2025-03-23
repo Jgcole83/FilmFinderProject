@@ -1,102 +1,73 @@
-/* General Page Styling */
+/* Basic styling for the page */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  /* Dropdown Menu Styling */
-  .select-container {
-    margin-bottom: 20px;
-  }
-  
-  select {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 250px;
-    background-color: #fff;
-    color: #333;
-    cursor: pointer;
-  }
-  
-  select:focus {
-    border-color: #007BFF;
-    outline: none;
-  }
-  
-  /* Button Styling */
-  button {
-    padding: 12px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Movie Info Section */
-  #movieInfo {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  #movieInfo h2 {
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  #movieInfo p {
-    color: #555;
-    line-height: 1.6;
-  }
-  
-  /* Loader (for async fetching) */
-  .loader {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #007BFF;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 2s linear infinite;
-    margin: 20px auto;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  /* Error Message */
-  .error-message {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+#genreDropdown {
+  display: block;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 16px;
+  width: 200px; /* Adjusted width */
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#movieInfo {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#likeOrDislikeBtns {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#likeOrDislikeBtns button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#likeOrDislikeBtns button:hover {
+  background-color: #0b7dda;
+}
+
+#moviePoster img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}

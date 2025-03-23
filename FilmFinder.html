@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Film Finder</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400&family=Fredoka+One&family=Questrial&family=Staatliches&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="public/style.css">
-    <script defer src="https://kit.fontawesome.com/e918d10e90.js" crossorigin="anonymous"></script>
-    <script defer src="public/helpers.js"></script>
-    <script defer src="public/script.js"></script>
-  </head>
-  <body>
-    <header>
-      <h1 id="appTitle">🍿Film Finder🍿</h1>
-    </header>
-    <form id="genreForm">
-      <label>Choose a genre:</label>
-      <select name="genres" id="genres">
-      </select>
-    </form>
-    <button id="playBtn">Let's Play!</button>
-    <div id="movieInfo">
-      <div id="moviePoster"></div>
-      <div id="movieText"></div>
-    </div>
-    <div id="likeOrDislikeBtns" hidden>
-      <button id="likeBtn"><i class="fa-solid fa-thumbs-up"></i></button>
-      <button id="dislikeBtn"><i class="fa-solid fa-thumbs-down"></i></button>
-    </div>
-  </body>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film Finder</title>
+  <link rel="stylesheet" href="style.css"> <!-- Make sure the path is correct -->
+</head>
+
+<body>
+  <h1>Film Finder</h1>
+
+  <!-- Dropdown to select genre -->
+  <label for="genreDropdown">Select Genre:</label>
+  <select id="genreDropdown">
+    <option value="">Select a Genre</option>
+    <!-- Genres will be populated here dynamically -->
+  </select>
+
+  <button id="playBtn">Play Random Movie</button>
+
+  <!-- Container for displaying movie information -->
+  <div id="movieContainer">
+    <!-- Movies will be displayed here dynamically -->
+  </div>
+
+  <!-- Include the script file at the end of the body -->
+  <script src="FilmFinder.js"></script> <!-- Ensure the path is correct -->
+</body>
+
 </html>
